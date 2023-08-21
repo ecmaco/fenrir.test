@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Driver {
 
-    private static AndroidDriver appiumDriver;
+    public static AndroidDriver appiumDriver;
 
     static final String TELEFONADI="PIXEL2";
     static final String ANDROIDVERSION="10.0";
