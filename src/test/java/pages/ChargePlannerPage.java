@@ -3,6 +3,7 @@ package pages;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
@@ -20,5 +21,5 @@ public class ChargePlannerPage {
 
 
     @FindBy(xpath = "//*[@text='Allow only while using the app']")
-    public MobileElement allowLocation;
+    public WebElement allowLocation;
 }

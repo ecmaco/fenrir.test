@@ -38,10 +38,12 @@ public class ChargePlannerStepdefinitions {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, version);
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, automation);
         capabilities.setCapability(MobileCapabilityType.APP, apk);
+        capabilities.setCapability(MobileCapabilityType.NO_RESET,false);
 
         driver = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
+
 
     @Given("ilk ekran ayarlarini yapin  {string} a tiklayin ve programa giris yapin")
     public void ilkEkranAyarlariniYapinATiklayinVeProgramaGirisYapin(String string) {
@@ -51,12 +53,14 @@ public class ChargePlannerStepdefinitions {
         ReusableMethods.wait(5);
         chargePlannerPage.allowLocation.click();
 
-        for (int i=0; i<3; i++){
+        for (int i=0; i<5; i++){
             action.press(PointOption.point(957,1893))
                     .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
                     .release().perform();
         }
+        ReusableMethods.wait(1);
         ReusableMethods.scrollWithUiScrollable(string);
+        ReusableMethods.wait(5);
     }
 }
 

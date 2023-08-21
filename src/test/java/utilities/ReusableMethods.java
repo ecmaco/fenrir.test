@@ -16,31 +16,33 @@ import java.util.Date;
 
 public class ReusableMethods {
 
-    public static void koordinatTiklama(int xKoordinat,int yKoordinat,int bekleme) throws InterruptedException {
-        TouchAction touchAction=new TouchAction<>(Driver.getAndroidDriver());
-        touchAction.press(PointOption.point(xKoordinat,yKoordinat)).release().perform();
+    public static void koordinatTiklama(int xKoordinat, int yKoordinat, int bekleme) throws InterruptedException {
+        TouchAction touchAction = new TouchAction<>(Driver.getAndroidDriver());
+        touchAction.press(PointOption.point(xKoordinat, yKoordinat)).release().perform();
         Thread.sleep(bekleme);
     }
 
-    public static void ekranAltKaydirma(int xKoordinat,int yKoordinat,int wait,int mxKoordinat,int myKoordinat,int bekleme) throws InterruptedException {
-        TouchAction touchAction=new TouchAction<>(Driver.getAndroidDriver());
+    public static void ekranAltKaydirma(int xKoordinat, int yKoordinat, int wait, int mxKoordinat, int myKoordinat, int bekleme) throws InterruptedException {
+        TouchAction touchAction = new TouchAction<>(Driver.getAndroidDriver());
         touchAction
-                .press(PointOption.point(xKoordinat,yKoordinat))
+                .press(PointOption.point(xKoordinat, yKoordinat))
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(wait)))
-                .moveTo(PointOption.point(mxKoordinat,myKoordinat))
+                .moveTo(PointOption.point(mxKoordinat, myKoordinat))
                 .release()
                 .perform();
         Thread.sleep(bekleme);
     }
-    public static void ekranSagKaydirma(int xKoordinat,int yKoordinat,int wait,int mXkoordinat,int mYkoordinat,int bekleme) throws InterruptedException {
-        TouchAction touchAction=new TouchAction<>(Driver.getAndroidDriver());
-        touchAction.press(PointOption.point(xKoordinat,yKoordinat))
+
+    public static void ekranSagKaydirma(int xKoordinat, int yKoordinat, int wait, int mXkoordinat, int mYkoordinat, int bekleme) throws InterruptedException {
+        TouchAction touchAction = new TouchAction<>(Driver.getAndroidDriver());
+        touchAction.press(PointOption.point(xKoordinat, yKoordinat))
                 .waitAction(WaitOptions.waitOptions(Duration.ofMillis(wait)))
-                .moveTo(PointOption.point(mXkoordinat,mYkoordinat)).release().perform();
+                .moveTo(PointOption.point(mXkoordinat, mYkoordinat)).release().perform();
         Thread.sleep(bekleme);
     }
+
     public static void scrollWithUiScrollable(String elementText) {
-        AndroidDriver driver = (AndroidDriver)  Driver.getAndroidDriver();
+        AndroidDriver driver = (AndroidDriver) Driver.getAndroidDriver();
         driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"" + elementText + "\"))");
         driver.findElementByXPath("//*[@text='" + elementText + "']").click();
 
@@ -50,7 +52,7 @@ public class ReusableMethods {
         // naming the screenshot with the current date to avoid duplication
         String date = new SimpleDateFormat("yyyyMMddhhssmm").format(new Date());
         // TakesScreenshot is an interface of selenium that takes the screenshot
-        TakesScreenshot ts = (TakesScreenshot)Driver.getAndroidDriver();
+        TakesScreenshot ts = (TakesScreenshot) Driver.getAndroidDriver();
         File source = ts.getScreenshotAs(OutputType.FILE);
         // full path to the screenshot location
         String target = System.getProperty("user.dir") + "/target/Screenshots/" + name + date + ".png";
@@ -61,50 +63,56 @@ public class ReusableMethods {
     }
 
 
-    public static  void wait(int saniye) {
+    public static void wait(int saniye) {
         try {
             Thread.sleep(saniye * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-    public static void scrollDown() {
-        int screenHeight = Driver.getAndroidDriver().manage().window().getSize().getHeight();
-        int screenWidth = Driver.getAndroidDriver().manage().window().getSize().getWidth();
-
-        int startX = screenWidth / 2;
-        int startY = (int) (screenHeight * 0.8);
-        int endY = (int) (screenHeight * 0.2);
-
-        new TouchAction<>(Driver.getAndroidDriver())
-                .longPress(PointOption.point(startX, startY))
-                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
-                .moveTo(PointOption.point(startX, endY))
-                .release()
-                .perform();
     }
 
-    public static void scrollUp() {
-        int screenHeight = Driver.getAndroidDriver().manage().window().getSize().getHeight();
-        int screenWidth = Driver.getAndroidDriver().manage().window().getSize().getWidth();
+        public static void scrollDown () {
+            int screenHeight = Driver.getAndroidDriver().manage().window().getSize().getHeight();
+            int screenWidth = Driver.getAndroidDriver().manage().window().getSize().getWidth();
 
-        int startX = screenWidth / 2;
-        int startY = (int) (screenHeight * 0.2);
-        int endY = (int) (screenHeight * 0.8);
+            int startX = screenWidth / 2;
+            int startY = (int) (screenHeight * 0.8);
+            int endY = (int) (screenHeight * 0.2);
 
-        new TouchAction<>(Driver.getAndroidDriver())
-                .longPress(PointOption.point(startX, startY))
-                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
-                .moveTo(PointOption.point(startX, endY))
-                .release()
-                .perform();
+            new TouchAction<>(Driver.getAndroidDriver())
+                    .longPress(PointOption.point(startX, startY))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+                    .moveTo(PointOption.point(startX, endY))
+                    .release()
+                    .perform();
+        }
+
+        public static void scrollUp () {
+            int screenHeight = Driver.getAndroidDriver().manage().window().getSize().getHeight();
+            int screenWidth = Driver.getAndroidDriver().manage().window().getSize().getWidth();
+
+            int startX = screenWidth / 2;
+            int startY = (int) (screenHeight * 0.2);
+            int endY = (int) (screenHeight * 0.8);
+
+            new TouchAction<>(Driver.getAndroidDriver())
+                    .longPress(PointOption.point(startX, startY))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+                    .moveTo(PointOption.point(startX, endY))
+                    .release()
+                    .perform();
+        }
+
+        public static void textClick(String elementText){
+
+            Driver.getAndroidDriver().findElementByXPath("//*[text()='" + elementText + "']").click();
+
+
+        }
+
     }
 
-    public static void textClick(String elementText){
-
-        Driver.getAndroidDriver().findElementByXPath("//*[text()='"+elementText+"']").click();
 
 
-    }
 
-}
+
