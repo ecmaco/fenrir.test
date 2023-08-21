@@ -47,12 +47,10 @@ public class Driver {
                 throw new UnsupportedOperationException("Invalid Platform Name ");
 
             }
-
         }
 
         return appiumDriver;
     }
-
 
     public static void quitAppiumDriver(){
         if (appiumDriver != null) {

@@ -60,12 +60,51 @@ public class ReusableMethods {
         return target;
     }
 
+
     public static  void wait(int saniye) {
         try {
             Thread.sleep(saniye * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+    public static void scrollDown() {
+        int screenHeight = Driver.getAndroidDriver().manage().window().getSize().getHeight();
+        int screenWidth = Driver.getAndroidDriver().manage().window().getSize().getWidth();
+
+        int startX = screenWidth / 2;
+        int startY = (int) (screenHeight * 0.8);
+        int endY = (int) (screenHeight * 0.2);
+
+        new TouchAction<>(Driver.getAndroidDriver())
+                .longPress(PointOption.point(startX, startY))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+                .moveTo(PointOption.point(startX, endY))
+                .release()
+                .perform();
+    }
+
+    public static void scrollUp() {
+        int screenHeight = Driver.getAndroidDriver().manage().window().getSize().getHeight();
+        int screenWidth = Driver.getAndroidDriver().manage().window().getSize().getWidth();
+
+        int startX = screenWidth / 2;
+        int startY = (int) (screenHeight * 0.2);
+        int endY = (int) (screenHeight * 0.8);
+
+        new TouchAction<>(Driver.getAndroidDriver())
+                .longPress(PointOption.point(startX, startY))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+                .moveTo(PointOption.point(startX, endY))
+                .release()
+                .perform();
+    }
+
+    public static void textClick(String elementText){
+
+        Driver.getAndroidDriver().findElementByXPath("//*[text()='"+elementText+"']").click();
+
+
     }
 
 }
