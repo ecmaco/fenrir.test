@@ -60,6 +60,14 @@ public class ReusableMethods {
         return target;
     }
 
+
+    public static  void wait(int saniye) {
+        try {
+            Thread.sleep(saniye * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     public static void scrollDown() {
         int screenHeight = Driver.getAndroidDriver().manage().window().getSize().getHeight();
         int screenWidth = Driver.getAndroidDriver().manage().window().getSize().getWidth();
@@ -95,6 +103,7 @@ public class ReusableMethods {
     public static void textClick(String elementText){
 
         Driver.getAndroidDriver().findElementByXPath("//*[text()='"+elementText+"']").click();
+
 
     }
 
