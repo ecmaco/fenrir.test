@@ -1,6 +1,8 @@
 package stepdefinitions;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -49,9 +51,9 @@ public class ChargePlannerStepdefinitions {
     public void ilkEkranAyarlariniYapinATiklayinVeProgramaGirisYapin(String string) {
 
 
-        // 962 1916
+
         ReusableMethods.wait(5);
-        chargePlannerPage.allowLocation.click();
+        ReusableMethods.clickWithTimeOut(chargePlannerPage.allowLocation,3);
 
         for (int i=0; i<5; i++){
             action.press(PointOption.point(957,1893))
@@ -60,7 +62,59 @@ public class ChargePlannerStepdefinitions {
         }
         ReusableMethods.wait(1);
         ReusableMethods.scrollWithUiScrollable(string);
+        //ReusableMethods.wait(5);
+        ReusableMethods.waitForVisibility((MobileElement) chargePlannerPage.settings);
+       // ReusableMethods.fluentWait(chargePlannerPage.Location,150);
+        chargePlannerPage.settings.click();
+        ReusableMethods.wait(7);
+
+    }
+
+    @Given("ilk ekran ayarlarini yapin login olmak icin {string} ve {string} girerek  programa giris yapin")
+    public void ilkEkranAyarlariniYapinLoginOlmakIcinVeGirerekProgramaGirisYapin(String arg0, String arg1) {
         ReusableMethods.wait(5);
+        ReusableMethods.clickWithTimeOut(chargePlannerPage.allowLocation,3);
+
+        for (int i=0; i<5; i++){
+            action.press(PointOption.point(957,1893))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                    .release().perform();
+        }
+        ReusableMethods.wait(1);
+        chargePlannerPage.emailAdressLabel.sendKeys(arg0);
+        ReusableMethods.wait(1);
+        chargePlannerPage.passwordLabel.sendKeys(arg1);
+        ReusableMethods.wait(1);
+        //ReusableMethods.textClick("Login");
+        chargePlannerPage.loginButton.click();
+        ReusableMethods.wait(3);
+        ReusableMethods.waitForVisibility((MobileElement) chargePlannerPage.settings);
+        // ReusableMethods.fluentWait(chargePlannerPage.Location,150);
+        chargePlannerPage.settings.click();
+        ReusableMethods.wait(7);
+    }
+
+    @Given("ilk ekran ayarlarini yapin ve {string} butonuna tiklayarak yeni hesap olusturarak Login girisi yapin")
+    public void ilkEkranAyarlariniYapinVeButonunaTiklayarakYeniHesapOlusturarakLoginGirisiYapin(String arg0) {
+        ReusableMethods.wait(5);
+        ReusableMethods.clickWithTimeOut(chargePlannerPage.allowLocation,3);
+
+        for (int i=0; i<5; i++){
+            action.press(PointOption.point(957,1893))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                    .release().perform();
+        }
+        ReusableMethods.wait(1);
+        ReusableMethods.scrollWithUiScrollable(arg0);
+        ReusableMethods.wait(1);
+        chargePlannerPage.fullNameLabel.sendKeys("ysusuf");
+        chargePlannerPage.emailLabel.sendKeys("yusufk@gmail.com");
+        chargePlannerPage.passwordSignUpLabel.sendKeys("Yks3683542");
+        chargePlannerPage.confirmPasswordLabel.sendKeys("Yks3683542");
+        chargePlannerPage.signUpLabel.click();
+        ReusableMethods.wait(3);
+
+
     }
 }
 

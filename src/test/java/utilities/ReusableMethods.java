@@ -1,18 +1,22 @@
 package utilities;
 
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.function.Function;
 
 public class ReusableMethods {
 
@@ -105,12 +109,42 @@ public class ReusableMethods {
 
         public static void textClick(String elementText){
 
-            Driver.getAndroidDriver().findElementByXPath("//*[text()='" + elementText + "']").click();
+            Driver.getAndroidDriver().findElementByXPath("//*[@text='" + elementText + "']").click();
 
 
         }
 
+    public static WebElement fluentWait(final WebElement webElement, int timeout) {
+        //FluentWait<WebDriver> wait = new FluentWait<WebDriver>(Driver.getDriver()).withTimeout(timeinsec, TimeUnit.SECONDS).pollingEvery(timeinsec, TimeUnit.SECONDS);
+        FluentWait<WebDriver> wait = new FluentWait<WebDriver>(Driver.getAndroidDriver())
+                .withTimeout(Duration.ofSeconds(3))//Wait 3 second each time
+                .pollingEvery(Duration.ofSeconds(1));//Check for the element every 1 second
+        WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+            public WebElement apply(WebDriver driver) {
+                return webElement;
+            }
+        });
+        return element;
     }
+
+    public static void clickWithTimeOut(WebElement element, int timeout) {
+        for (int i = 0; i < timeout; i++) {
+            try {
+                element.click();
+                return;
+            } catch (WebDriverException e) {
+                ReusableMethods.wait(1);
+            }
+        }
+    }
+
+
+    public static WebElement waitForVisibility(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(Driver.getAndroidDriver(), 250);
+        return  wait.until(ExpectedConditions.visibilityOf(element));
+    }
+}
+
 
 
 
