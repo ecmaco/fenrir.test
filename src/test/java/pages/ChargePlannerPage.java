@@ -21,5 +21,37 @@ public class ChargePlannerPage {
 
 
     @FindBy(xpath = "//*[@text='Allow only while using the app']")
-    public WebElement allowLocation;
+    public MobileElement allowLocation;
+
+    @FindBy(xpath = "//*[@index='21']")
+    public MobileElement Location;
+
+    @FindBy(xpath = "//*[@index='3']")
+    public MobileElement settings;
+
+    @FindBy(xpath = "//*[@text='Email address']")
+    public MobileElement emailAdressLabel;
+
+
+    @FindBy(xpath = "//*[@text='Password']")
+    public MobileElement passwordLabel;
+
+    @FindBy(xpath = "(//*[@text='Login'])[2]")
+    public MobileElement loginButton;
+
+
+    @FindBy(xpath = "//*[@text='Full Name']")
+    public MobileElement fullNameLabel;
+
+    @FindBy(xpath = "//*[@text='Email address']")
+    public MobileElement emailLabel;
+
+    @FindBy(xpath = "//*[@text='Password']")
+    public MobileElement passwordSignUpLabel;
+
+    @FindBy(xpath = "//*[@text='Confirm Password']")
+    public MobileElement confirmPasswordLabel;
+
+    @FindBy(xpath = "//*[@text='Sign Up']")
+    public MobileElement signUpLabel;
 }
