@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 import static utilities.Driver.appiumDriver;
 
 public class ChargePlannerStepdefinitions {
-    AndroidDriver<AndroidElement> driver= Driver.getAndroidDriver();
+
     ChargePlannerPage chargePlannerPage=new ChargePlannerPage();
     TouchAction action=new TouchAction(Driver.getAndroidDriver());
     @Given("Kullanici gerekli kurulumlari yaparak apk yukleme {string} islemini gerceklestirir")
