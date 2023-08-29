@@ -12,6 +12,7 @@ import io.appium.java_client.touch.offset.PointOption;
 import io.cucumber.java.en.Given;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.ChargePlannerPage;
+import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
@@ -23,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 import static utilities.Driver.appiumDriver;
 
 public class ChargePlannerStepdefinitions {
-    AndroidDriver<AndroidElement> driver= Driver.getAndroidDriver();
+
     ChargePlannerPage chargePlannerPage=new ChargePlannerPage();
     TouchAction action=new TouchAction(Driver.getAndroidDriver());
     @Given("Kullanici gerekli kurulumlari yaparak apk yukleme {string} islemini gerceklestirir")
@@ -50,8 +51,6 @@ public class ChargePlannerStepdefinitions {
     @Given("ilk ekran ayarlarini yapin  {string} a tiklayin ve programa giris yapin")
     public void ilkEkranAyarlariniYapinATiklayinVeProgramaGirisYapin(String string) {
 
-
-
         ReusableMethods.wait(5);
         ReusableMethods.clickWithTimeOut(chargePlannerPage.allowLocation,3);
 
@@ -67,8 +66,9 @@ public class ChargePlannerStepdefinitions {
        // ReusableMethods.fluentWait(chargePlannerPage.Location,150);
         chargePlannerPage.settings.click();
         ReusableMethods.wait(7);
-
     }
+
+    /*
 
     @Given("ilk ekran ayarlarini yapin login olmak icin {string} ve {string} girerek  programa giris yapin")
     public void ilkEkranAyarlariniYapinLoginOlmakIcinVeGirerekProgramaGirisYapin(String arg0, String arg1) {
@@ -94,6 +94,9 @@ public class ChargePlannerStepdefinitions {
         ReusableMethods.wait(7);
     }
 
+     */
+
+    /*
     @Given("ilk ekran ayarlarini yapin ve {string} butonuna tiklayarak yeni hesap olusturarak Login girisi yapin")
     public void ilkEkranAyarlariniYapinVeButonunaTiklayarakYeniHesapOlusturarakLoginGirisiYapin(String arg0) {
         ReusableMethods.wait(5);
@@ -113,8 +116,52 @@ public class ChargePlannerStepdefinitions {
         chargePlannerPage.confirmPasswordLabel.sendKeys("Yks3683542");
         chargePlannerPage.signUpLabel.click();
         ReusableMethods.wait(3);
-
-
     }
+
+     */
+
+    @Given("ilk ekran ayarlari yapin")
+    public void ilkEkranAyarlariYapin() {
+        do {
+            ReusableMethods.clickWithTimeOut(chargePlannerPage.allowLocation, 3);
+            ReusableMethods.wait(5);
+        } while (ReusableMethods.control());
+
+        for (int i = 0; i < 4; i++) {
+            action.press(PointOption.point(957, 1893))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                    .release().perform();
+        }
+    }
+
+    @Given("ilk ekran ayarlari ve kullanici girisi yapin")
+    public void ilkEkranAyarlariVeKullaniciGirisiYapin() {
+        do {
+            ReusableMethods.clickWithTimeOut(chargePlannerPage.allowLocation, 3);
+            ReusableMethods.wait(5);
+        } while (ReusableMethods.control());
+
+        for (int i = 0; i < 4; i++) {
+            action.press(PointOption.point(957, 1893))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                    .release().perform();
+        }
+
+        chargePlannerPage.emailAdressLabel.sendKeys(ConfigReader.getProperty("mail"));
+        chargePlannerPage.passwordLabel.sendKeys(ConfigReader.getProperty("password"));
+        chargePlannerPage.loginButton.click();
+    }
+
+    @Given("yeni hesap olusturun")
+    public void yeniHesapOlusturun() {
+
+        ReusableMethods.scrollWithUiScrollable("Sign Up");
+        chargePlannerPage.fullNameLabel.sendKeys("test test");
+        chargePlannerPage.emailLabel.sendKeys("test@mail.com");
+        chargePlannerPage.passwordSignUpLabel.sendKeys("qwer1234");
+        chargePlannerPage.confirmPasswordLabel.sendKeys("qwer1234");
+        chargePlannerPage.signUpLabel.click();
+    }
+
 }
 
