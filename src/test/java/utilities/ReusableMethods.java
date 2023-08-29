@@ -143,6 +143,18 @@ public class ReusableMethods {
         WebDriverWait wait = new WebDriverWait(Driver.getAndroidDriver(), 250);
         return  wait.until(ExpectedConditions.visibilityOf(element));
     }
+
+    public static boolean control(){
+        try {
+            Driver.getAndroidDriver().findElementByXPath("//*[@text='Create an Account']").isDisplayed();
+        }catch (Exception e){
+            Driver.appiumDriver.closeApp();
+            Driver.appiumDriver.launchApp();
+            return true;
+        }
+        wait(1);
+        return false;
+    }
 }
 
 
