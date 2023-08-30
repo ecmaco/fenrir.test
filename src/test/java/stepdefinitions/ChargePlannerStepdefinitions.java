@@ -47,7 +47,7 @@ public class ChargePlannerStepdefinitions {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
-
+  /*
     @Given("ilk ekran ayarlarini yapin  {string} a tiklayin ve programa giris yapin")
     public void ilkEkranAyarlariniYapinATiklayinVeProgramaGirisYapin(String string) {
 
@@ -134,24 +134,6 @@ public class ChargePlannerStepdefinitions {
         }
     }
 
-    @Given("ilk ekran ayarlari ve kullanici girisi yapin")
-    public void ilkEkranAyarlariVeKullaniciGirisiYapin() {
-        do {
-            ReusableMethods.clickWithTimeOut(chargePlannerPage.allowLocation, 3);
-            ReusableMethods.wait(5);
-        } while (ReusableMethods.control());
-
-        for (int i = 0; i < 4; i++) {
-            action.press(PointOption.point(957, 1893))
-                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
-                    .release().perform();
-        }
-
-        chargePlannerPage.emailAdressLabel.sendKeys(ConfigReader.getProperty("mail"));
-        chargePlannerPage.passwordLabel.sendKeys(ConfigReader.getProperty("password"));
-        chargePlannerPage.loginButton.click();
-    }
-
     @Given("yeni hesap olusturun")
     public void yeniHesapOlusturun() {
 
@@ -163,5 +145,12 @@ public class ChargePlannerStepdefinitions {
         chargePlannerPage.signUpLabel.click();
     }
 
+    @Given("kullanici girisi yapin")
+    public void kullaniciGirisiYapin() {
+
+        chargePlannerPage.emailAdressLabel.sendKeys(ConfigReader.getProperty("mail"));
+        chargePlannerPage.passwordLabel.sendKeys(ConfigReader.getProperty("password"));
+        chargePlannerPage.loginButton.click();
+    }
 }
 
