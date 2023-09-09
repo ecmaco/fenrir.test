@@ -41,7 +41,7 @@ public class Driver {
 
                 assert appiumServerURL != null;
                 appiumDriver = new AndroidDriver<>(appiumServerURL,caps);
-                appiumDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+                appiumDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
             }else {
 
                 throw new UnsupportedOperationException("Invalid Platform Name ");
