@@ -6,6 +6,7 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import io.cucumber.java.en.But;
 import io.cucumber.java.en.Given;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.ChargePlannerPage;
@@ -99,9 +100,9 @@ public class ChargePlannerStepdefinitions {
         ReusableMethods.clickWithTimeOut(chargePlannerPage.allowLocation,3);
 
         for (int i=0; i<5; i++){
-            action.press(PointOption.point(957,1893))
-                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
-                    .release().perform();
+            Driver.getAndroidDriver().findElementByXPath("(//*[@class='android.view.ViewGroup'])[30]").click();
+            ReusableMethods.wait(1);
+
         }
         ReusableMethods.wait(1);
         ReusableMethods.scrollWithUiScrollable(arg0);
@@ -148,5 +149,7 @@ public class ChargePlannerStepdefinitions {
         chargePlannerPage.passwordLabel.sendKeys(ConfigReader.getProperty("password"));
         chargePlannerPage.loginButton.click();
     }
+
+
 }
 

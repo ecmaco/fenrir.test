@@ -13,7 +13,7 @@ import java.time.Duration;
 public class ChargePlannerPage {
 
     public ChargePlannerPage(){
-       // PageFactory.initElements((WebDriver)Driver.getAndroidDriver(),this);
+        //PageFactory.initElements((WebDriver)Driver.getAndroidDriver(),this);
        PageFactory.initElements(new AppiumFieldDecorator(Driver.getAndroidDriver(), Duration.ofSeconds(15)),this);
 
     }
