@@ -26,7 +26,7 @@ public class ChargePlannerPage {
     @FindBy(xpath = "//*[@index='21']")
     public MobileElement Location;
 
-    @FindBy(xpath = "//*[@index='3']")
+    @FindBy(xpath = "(//*[@class='android.view.View']//*[@index='3'])[2]")
     public MobileElement settings;
 
     @FindBy(xpath = "//*[@text='Email address']")

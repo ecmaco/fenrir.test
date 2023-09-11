@@ -9,9 +9,13 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import org.junit.Assert;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.ChargePlannerPage;
+import pages.SettingsPage;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
@@ -23,8 +27,9 @@ import java.util.concurrent.TimeUnit;
 import static utilities.Driver.appiumDriver;
 
 public class ChargePlannerStepdefinitions {
-    AndroidDriver<AndroidElement> driver= Driver.getAndroidDriver();
+
     ChargePlannerPage chargePlannerPage=new ChargePlannerPage();
+    SettingsPage settingsPage=new SettingsPage();
     TouchAction action=new TouchAction(Driver.getAndroidDriver());
     @Given("Kullanici gerekli kurulumlari yaparak apk yukleme {string} islemini gerceklestirir")
     public void kullanici_gerekli_kurulumlari_yaparak_apk_yukleme_islemini_gerceklestirir(String apk) throws MalformedURLException {
@@ -55,7 +60,7 @@ public class ChargePlannerStepdefinitions {
         ReusableMethods.wait(5);
         ReusableMethods.clickWithTimeOut(chargePlannerPage.allowLocation,3);
 
-        for (int i=0; i<5; i++){
+        for (int i=0; i<4; i++){
             action.press(PointOption.point(957,1893))
                     .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
                     .release().perform();
@@ -105,16 +110,48 @@ public class ChargePlannerStepdefinitions {
                     .release().perform();
         }
         ReusableMethods.wait(1);
-        ReusableMethods.scrollWithUiScrollable(arg0);
+
+        //ReusableMethods.wait(1);
+        chargePlannerPage.emailAdressLabel.sendKeys("yusufk@gmail.com");
+        chargePlannerPage.passwordLabel.sendKeys("Yk3683542");
         ReusableMethods.wait(1);
-        chargePlannerPage.fullNameLabel.sendKeys("ysusuf");
-        chargePlannerPage.emailLabel.sendKeys("yusufk@gmail.com");
-        chargePlannerPage.passwordSignUpLabel.sendKeys("Yks3683542");
-        chargePlannerPage.confirmPasswordLabel.sendKeys("Yks3683542");
-        chargePlannerPage.signUpLabel.click();
-        ReusableMethods.wait(3);
+        chargePlannerPage.loginButton.click();
+        ReusableMethods.wait(15);
 
 
+    }
+
+    @Then("Settings tusuna basilarak ayarlar kismina gidilir")
+    public void settingTusunaBasilarakAyarlarKisminaGidilir() {
+        chargePlannerPage.settings.click();
+        ReusableMethods.wait(2);
+    }
+
+    @And("Add My Car butonuna tiklanir")
+    public void addMyCarButonunaTiklanir() {
+        settingsPage.addMyCarButton.click();
+        ReusableMethods.wait(2);
+
+    }
+
+    @And("Istenilen araba modeli secilir")
+    public void istenilenArabaModeliSecilir() {
+            settingsPage.searchCarBox.sendKeys("Opel Astra Electric");
+            ReusableMethods.wait(2);
+            settingsPage.chosenCar.click();
+            ReusableMethods.wait(2);
+            settingsPage.carSavedButton.click();
+            ReusableMethods.wait(1);
+            settingsPage.allowCarInformation.click();
+            ReusableMethods.wait(2);
+
+    }
+
+    @Then("Settings kisminda secilen arabanin kayitli oldugu dogrulanir")
+    public void settingKismindaSecilenArabaninKayitliOlduguDogrulanir() {
+       String actual= settingsPage.chosenCar.getText();
+       String expected="Opel Astra Electric";
+        Assert.assertEquals(expected,actual);
     }
 }
 
