@@ -1,7 +1,5 @@
 package stepdefinitions;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -9,28 +7,41 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+
 import io.cucumber.java.en.And;
+
+import io.cucumber.java.en.But;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.asserts.SoftAssert;
 import pages.ChargePlannerPage;
+
 import pages.SettingsPage;
+
+import utilities.ConfigReader;
+
 import utilities.Driver;
 import utilities.ReusableMethods;
 
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import static utilities.Driver.appiumDriver;
 
 public class ChargePlannerStepdefinitions {
 
     ChargePlannerPage chargePlannerPage=new ChargePlannerPage();
     SettingsPage settingsPage=new SettingsPage();
     TouchAction action=new TouchAction(Driver.getAndroidDriver());
+
+    SoftAssert softAssert=new SoftAssert();
+
     @Given("Kullanici gerekli kurulumlari yaparak apk yukleme {string} islemini gerceklestirir")
     public void kullanici_gerekli_kurulumlari_yaparak_apk_yukleme_islemini_gerceklestirir(String apk) throws MalformedURLException {
         AndroidDriver<AndroidElement> driver; //android cihazlarin driveri
@@ -55,8 +66,6 @@ public class ChargePlannerStepdefinitions {
     @Given("ilk ekran ayarlarini yapin  {string} a tiklayin ve programa giris yapin")
     public void ilkEkranAyarlariniYapinATiklayinVeProgramaGirisYapin(String string) {
 
-
-
         ReusableMethods.wait(5);
         ReusableMethods.clickWithTimeOut(chargePlannerPage.allowLocation,3);
 
@@ -72,8 +81,9 @@ public class ChargePlannerStepdefinitions {
        // ReusableMethods.fluentWait(chargePlannerPage.Location,150);
         chargePlannerPage.settings.click();
         ReusableMethods.wait(7);
-
     }
+
+
 
     @Given("ilk ekran ayarlarini yapin login olmak icin {string} ve {string} girerek  programa giris yapin")
     public void ilkEkranAyarlariniYapinLoginOlmakIcinVeGirerekProgramaGirisYapin(String arg0, String arg1) {
@@ -99,22 +109,28 @@ public class ChargePlannerStepdefinitions {
         ReusableMethods.wait(7);
     }
 
+
+
+
     @Given("ilk ekran ayarlarini yapin ve {string} butonuna tiklayarak yeni hesap olusturarak Login girisi yapin")
     public void ilkEkranAyarlariniYapinVeButonunaTiklayarakYeniHesapOlusturarakLoginGirisiYapin(String arg0) {
+
         ReusableMethods.wait(5);
         ReusableMethods.clickWithTimeOut(chargePlannerPage.allowLocation,3);
 
         for (int i=0; i<5; i++){
-            action.press(PointOption.point(957,1893))
-                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
-                    .release().perform();
+            Driver.getAndroidDriver().findElementByXPath("(//*[@class='android.view.ViewGroup'])[30]").click();
+            ReusableMethods.wait(1);
+
         }
+
         ReusableMethods.wait(1);
 
         //ReusableMethods.wait(1);
         chargePlannerPage.emailAdressLabel.sendKeys("yusufk@gmail.com");
         chargePlannerPage.passwordLabel.sendKeys("Yk3683542");
         ReusableMethods.wait(1);
+
         chargePlannerPage.loginButton.click();
         ReusableMethods.wait(15);
 
@@ -129,6 +145,8 @@ public class ChargePlannerStepdefinitions {
 
     @And("Add My Car butonuna tiklanir")
     public void addMyCarButonunaTiklanir() {
+        chargePlannerPage.settings.click();
+        ReusableMethods.wait(2);
         settingsPage.addMyCarButton.click();
         ReusableMethods.wait(2);
 
@@ -141,7 +159,7 @@ public class ChargePlannerStepdefinitions {
             settingsPage.chosenCar.click();
             ReusableMethods.wait(2);
             settingsPage.carSavedButton.click();
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(2);
             settingsPage.allowCarInformation.click();
             ReusableMethods.wait(2);
 
@@ -151,7 +169,107 @@ public class ChargePlannerStepdefinitions {
     public void settingKismindaSecilenArabaninKayitliOlduguDogrulanir() {
        String actual= settingsPage.chosenCar.getText();
        String expected="Opel Astra Electric";
-        Assert.assertEquals(expected,actual);
+        softAssert.assertEquals(expected,actual);
+        ReusableMethods.wait(2);
+
+//        chargePlannerPage.fullNameLabel.sendKeys("ysusuf");
+//        chargePlannerPage.emailLabel.sendKeys("yusufk@gmail.com");
+//        chargePlannerPage.passwordSignUpLabel.sendKeys("Yks3683542");
+//        chargePlannerPage.confirmPasswordLabel.sendKeys("Yks3683542");
+//        chargePlannerPage.signUpLabel.click();
+
     }
+
+
+
+    @Given("ilk ekran ayarlari yapin")
+    public void ilkEkranAyarlariYapin() {
+        do {
+            ReusableMethods.clickWithTimeOut(chargePlannerPage.allowLocation, 3);
+            ReusableMethods.wait(5);
+        } while (ReusableMethods.control());
+
+        for (int i = 0; i < 4; i++) {
+            action.press(PointOption.point(957, 1893))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                    .release().perform();
+        }
+    }
+
+    @Given("yeni hesap olusturun")
+    public void yeniHesapOlusturun() {
+
+        ReusableMethods.scrollWithUiScrollable("Sign Up");
+        chargePlannerPage.fullNameLabel.sendKeys("test test");
+        chargePlannerPage.emailLabel.sendKeys("test@mail.com");
+        chargePlannerPage.passwordSignUpLabel.sendKeys("qwer1234");
+        chargePlannerPage.confirmPasswordLabel.sendKeys("qwer1234");
+        chargePlannerPage.signUpLabel.click();
+
+    }
+
+    @Given("kullanici girisi yapin")
+    public void kullaniciGirisiYapin() {
+
+        chargePlannerPage.emailAdressLabel.sendKeys(ConfigReader.getProperty("mail"));
+        chargePlannerPage.passwordLabel.sendKeys(ConfigReader.getProperty("password"));
+        chargePlannerPage.loginButton.click();
+    }
+
+
+
+
+    @Then("kullanici\\(yusuf) girisi yapin")
+    public void kullaniciYusufGirisiYapin() {
+
+        chargePlannerPage.emailAdressLabel.sendKeys(ConfigReader.getProperty("mail3"));
+        chargePlannerPage.passwordLabel.sendKeys(ConfigReader.getProperty("password3"));
+        chargePlannerPage.loginButton.click();
+    }
+
+    @Then("Eklenecek arac modeli yazilir")
+    public void eklenecekAracModeliYazilir() {
+        settingsPage.searchCarBox.sendKeys("Opel Astra Electric");
+        ReusableMethods.wait(1);
+    }
+
+    @And("Sonuclarin dogru filitrelendigi dogrulanir")
+    public void sonuclarinDogruFilitrelendigiDogrulanir() {
+        String result=chargePlannerPage.searchResultCarList.getText();
+        String expected="Opel Astra Electric";
+        softAssert.assertEquals(expected,result);
+    }
+
+    @Then("Ayarlar sekmesinde Aracim sayfasinin gorunur oldugu dogrulanir")
+    public void ayarlarSekmesindeAracimSayfasininGorunurOlduguDogrulanir() {
+        softAssert.assertTrue(chargePlannerPage.addMyCarButton.isDisplayed());
+        ReusableMethods.wait(1);
+
+    }
+
+    @Given("Profile Settings sekmesine tiklanir")
+    public void profileSettingsSekmesineTiklanir() {
+        chargePlannerPage.settings.click();
+        ReusableMethods.wait(2);
+        chargePlannerPage.profileSettingsButton.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("Car sekmesine tiklanir")
+    public void carSekmesineTiklanir() {
+        chargePlannerPage.searchResultCarList.click();
+        ReusableMethods.wait(1);
+    }
+
+    @And("Arac modeli degistirmek icin listenin acildigi dogrulanir")
+    public void aracModeliDegistirmekIcinListeninAcildigiDogrulanir() {
+
+       String listcar=chargePlannerPage.searchCarResultAllList.getText();
+        softAssert.assertTrue(listcar.isBlank());
+        softAssert.assertAll();
+
+
+    }
+
 }
 

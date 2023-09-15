@@ -13,7 +13,7 @@ import java.time.Duration;
 public class ChargePlannerPage {
 
     public ChargePlannerPage(){
-       // PageFactory.initElements((WebDriver)Driver.getAndroidDriver(),this);
+        //PageFactory.initElements((WebDriver)Driver.getAndroidDriver(),this);
        PageFactory.initElements(new AppiumFieldDecorator(Driver.getAndroidDriver(), Duration.ofSeconds(15)),this);
 
     }
@@ -54,4 +54,17 @@ public class ChargePlannerPage {
 
     @FindBy(xpath = "//*[@text='Sign Up']")
     public MobileElement signUpLabel;
+
+    @FindBy(xpath = "//*[@text='Add My Car']")
+    public  MobileElement addMyCarButton;
+
+    @FindBy(xpath = "//*[@text='Opel Astra Electric']")
+    public MobileElement searchResultCarList;
+
+    @FindBy (xpath = "//*[@text='Profile Settings']")
+    public MobileElement profileSettingsButton;
+
+    @FindBy(xpath = "//*[@class='android.widget.ImageView']")
+    public MobileElement searchCarResultAllList;
+
 }
