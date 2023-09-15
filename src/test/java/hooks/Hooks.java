@@ -14,7 +14,10 @@ public class Hooks {
         if (scenario.isFailed()) {
             scenario.attach(screenshot, "image/png","screenshots");
         }
-        Driver.quitAppiumDriver();
+        //Driver.quitAppiumDriver();
+        //System.out.println(Driver.getAndroidDriver().removeApp("io.appium.uiautomator2.server"));
+        //System.out.println(Driver.getAndroidDriver().removeApp("io.appium.uiautomator2.server.test"));
+
     }
 
 }

@@ -112,7 +112,7 @@ public class SettingsPage {
     @FindBy(xpath = "//*[@text='Please sign-up to use this function.']")
     public MobileElement errorMessage;
 
-    @FindBy(xpath = "//*[@text='merguven75@mail.com']")
+    @FindBy(xpath = "//*[@text='test@mail.com']")
     public MobileElement mailText;
 
     @FindBy(xpath = "//*[@text='\uE001']")

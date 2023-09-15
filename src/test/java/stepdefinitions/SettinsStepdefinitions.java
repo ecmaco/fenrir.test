@@ -9,7 +9,6 @@ import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.BeforeMethod;
 import pages.SettingsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
