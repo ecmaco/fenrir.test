@@ -3,6 +3,7 @@ package utilities;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.apache.commons.io.FileUtils;
@@ -75,46 +76,46 @@ public class ReusableMethods {
         }
     }
 
-        public static void scrollDown () {
-            int screenHeight = Driver.getAndroidDriver().manage().window().getSize().getHeight();
-            int screenWidth = Driver.getAndroidDriver().manage().window().getSize().getWidth();
+    public static void scrollDown() {
+        int screenHeight = Driver.getAndroidDriver().manage().window().getSize().getHeight();
+        int screenWidth = Driver.getAndroidDriver().manage().window().getSize().getWidth();
 
-            int startX = screenWidth / 2;
-            int startY = (int) (screenHeight * 0.8);
-            int endY = (int) (screenHeight * 0.2);
+        int startX = screenWidth / 2;
+        int startY = (int) (screenHeight * 0.8);
+        int endY = (int) (screenHeight * 0.2);
 
-            new TouchAction<>(Driver.getAndroidDriver())
-                    .longPress(PointOption.point(startX, startY))
-                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
-                    .moveTo(PointOption.point(startX, endY))
-                    .release()
-                    .perform();
-        }
+        new TouchAction<>(Driver.getAndroidDriver())
+                .longPress(PointOption.point(startX, startY))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+                .moveTo(PointOption.point(startX, endY))
+                .release()
+                .perform();
+    }
 
-        public static void scrollUp () {
-            int screenHeight = Driver.getAndroidDriver().manage().window().getSize().getHeight();
-            int screenWidth = Driver.getAndroidDriver().manage().window().getSize().getWidth();
+    public static void scrollUp() {
+        int screenHeight = Driver.getAndroidDriver().manage().window().getSize().getHeight();
+        int screenWidth = Driver.getAndroidDriver().manage().window().getSize().getWidth();
 
-            int startX = screenWidth / 2;
-            int startY = (int) (screenHeight * 0.2);
-            int endY = (int) (screenHeight * 0.8);
+        int startX = screenWidth / 2;
+        int startY = (int) (screenHeight * 0.2);
+        int endY = (int) (screenHeight * 0.8);
 
-            new TouchAction<>(Driver.getAndroidDriver())
-                    .longPress(PointOption.point(startX, startY))
-                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
-                    .moveTo(PointOption.point(startX, endY))
-                    .release()
-                    .perform();
-        }
+        new TouchAction<>(Driver.getAndroidDriver())
+                .longPress(PointOption.point(startX, startY))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
+                .moveTo(PointOption.point(startX, endY))
+                .release()
+                .perform();
+    }
 
-        public static void textClick(String elementText){
+    public static void textClick(String elementText) {
 
-            Driver.getAndroidDriver().findElementByXPath("//*[@text='" + elementText + "']").click();
+        Driver.getAndroidDriver().findElementByXPath("//*[@text='" + elementText + "']").click();
 
 
-        }
+    }
 
-    public static WebElement fluentWait(final WebElement webElement, int timeout) {
+    public static WebElement fluentWait(final WebElement webElement) {
         //FluentWait<WebDriver> wait = new FluentWait<WebDriver>(Driver.getDriver()).withTimeout(timeinsec, TimeUnit.SECONDS).pollingEvery(timeinsec, TimeUnit.SECONDS);
         FluentWait<WebDriver> wait = new FluentWait<WebDriver>(Driver.getAndroidDriver())
                 .withTimeout(Duration.ofSeconds(3))//Wait 3 second each time
@@ -141,13 +142,13 @@ public class ReusableMethods {
 
     public static WebElement waitForVisibility(WebElement element) {
         WebDriverWait wait = new WebDriverWait(Driver.getAndroidDriver(), 250);
-        return  wait.until(ExpectedConditions.visibilityOf(element));
+        return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static boolean control(){
+    public static boolean control() {
         try {
             Driver.getAndroidDriver().findElementByXPath("//*[@text='Create an Account']").isDisplayed();
-        }catch (Exception e){
+        } catch (Exception e) {
             Driver.appiumDriver.closeApp();
             Driver.appiumDriver.launchApp();
             return true;
@@ -155,9 +156,14 @@ public class ReusableMethods {
         wait(1);
         return false;
     }
+
+
+    public static MobileElement waitForClickablility(AndroidDriver<AndroidElement> driver, MobileElement element, long timeoutInSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+        return (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
 }
-
-
 
 
 

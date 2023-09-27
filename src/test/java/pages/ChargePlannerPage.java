@@ -28,7 +28,7 @@ public class ChargePlannerPage {
     @FindBy(xpath = "//*[@index='21']")
     public MobileElement Location;
 
-    @FindBy(xpath = "//*[@index='3']")
+    @FindBy(xpath = "(//*[@class='android.view.View']//*[@index='3'])[2]")
     public MobileElement settings;
 
     @FindBy(xpath = "//*[@text='Email address']")
@@ -56,6 +56,19 @@ public class ChargePlannerPage {
 
     @FindBy(xpath = "//*[@text='Sign Up']")
     public MobileElement signUpLabel;
+
+
+    @FindBy(xpath = "//*[@text='Add My Car']")
+    public  MobileElement addMyCarButton;
+
+    @FindBy(xpath = "//*[@text='Car']")
+    public MobileElement searchResultCarList;
+
+    @FindBy (xpath = "//*[@text='Profile Settings']")
+    public MobileElement profileSettingsButton;
+
+    @FindBy(xpath = "//*[@bounds='[0,171][1080,1977]']")
+    public MobileElement searchCarResultAllList;
 
     @FindBy(xpath = "//*[@text='Invalid login credentials']")
     public MobileElement gecersizgirismesaji;
@@ -131,5 +144,8 @@ public class ChargePlannerPage {
     public MobileElement edremitLocation;
     @FindBy(xpath = "//*[@text='Bostancı mah. Bataklar Küme Evleri No:17 Edremit/Balıkesir']")
     public MobileElement edremitLocation2;
+
+    @FindBy (xpath = "(//*[@class='android.widget.TextView'])[10]")
+    public MobileElement locationSearchButton;
 
 }
