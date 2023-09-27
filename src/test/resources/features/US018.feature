@@ -1,4 +1,4 @@
-@wip
+
   Feature:US_018 Kullanıcı Profile Settings butonunun çalışıp çalışmadığını kontrol edebilmeli
 
     Background:Apps Launcher

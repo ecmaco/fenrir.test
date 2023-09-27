@@ -1,8 +1,9 @@
-
-  Feature: Add My Car butonunu kontrol etme
+@wip
+  Feature: Kullanic Add My Car sekmesinden aracini secebilmeli
 
   Background:Ilk ekran ayarlari
     Given ilk ekran ayarlari yapin
+
     Then  kullanici(yusuf) girisi yapin
 
   Scenario: TC_001 Kullanici girisi yapildiginda ayarlar sekmesinde Aracim sayfasi gorunur olmali
@@ -28,6 +29,7 @@
         Given Profile Settings sekmesine tiklanir
         Then  Car sekmesine tiklanir
         And   Arac modeli degistirmek icin listenin acildigi dogrulanir
+
 
 
 

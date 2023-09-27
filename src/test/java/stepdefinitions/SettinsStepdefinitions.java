@@ -9,7 +9,7 @@ import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.BeforeMethod;
+import pages.ChargePlannerPage;
 import pages.SettingsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 public class SettinsStepdefinitions {
 
     SettingsPage settingsPage=new SettingsPage();
-
+    ChargePlannerPage chargePlannerPage= new ChargePlannerPage();
     TouchAction touchAction=new TouchAction(Driver.getAndroidDriver());
 
     AndroidDriver driver;
@@ -301,5 +301,25 @@ public class SettinsStepdefinitions {
         ReusableMethods.waitForVisibility(settingsPage.profilIcon);
         settingsPage.profilSettingsButton.click();
         ReusableMethods.waitForVisibility(settingsPage.removeMyAccountButton);
+    }
+
+    @Then("Mesajlar butonunun gorunur oldugu kontrol edilir")
+    public void mesajlarButonununGorunurOlduguKontrolEdilir() {
+        ReusableMethods.wait(1);
+        Assert.assertTrue(settingsPage.messagesButton.isDisplayed());
+    }
+
+    @Given("Mesajlar butonuna  tiklanmalidir")
+    public void mesajlarButonunaTiklanmalidir() {
+        chargePlannerPage.settingsButton.click();
+        ReusableMethods.wait(2);
+
+        settingsPage.messagesButton.click();
+    }
+
+    @Then("Mesajlar sekmesinin acildigi dogrulanmalidir")
+    public void mesajlarSekmesininAcildigiDogrulanmalidir() {
+        ReusableMethods.wait(1);
+        Assert.assertTrue(settingsPage.noMessagesText.isEnabled());
     }
 }
