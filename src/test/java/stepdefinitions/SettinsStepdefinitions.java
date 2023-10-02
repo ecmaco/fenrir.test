@@ -39,15 +39,26 @@ public class SettinsStepdefinitions {
     @Given("Kullanıcı Mobil uygulamayı açar")
     public void kullanıcı_mobil_uygulamayı_açar() {
 
-        settingsPage.allowButton.click();
+        do {
+            ReusableMethods.clickWithTimeOut(settingsPage.allowButton, 2);
+            ReusableMethods.wait(2);
+        } while (ReusableMethods.control());
+
+
         settingsPage.crossButton.click();
 
     }
     @When("Kullanıcı Ana sayfada herhangi bir oturum açma işlemi yapmadan {string} bölümüne gider.")
-    public void kullanıcı_ana_sayfada_herhangi_bir_oturum_açma_işlemi_yapmadan_bölümüne_gider(String string) {
+    public void kullanıcı_ana_sayfada_herhangi_bir_oturum_açma_işlemi_yapmadan_bölümüne_gider(String Section) {
 
-        settingsPage.continueWithoutLoginButton.click();
-        settingsPage.settingsButton.click();
+        switch (Section) {
+            case "Profil Settings":{
+                settingsPage.continueWithoutLoginButton.click();
+                settingsPage.settingsButton.click();
+                break;
+            }
+        }
+
 
     }
     @Then("Kullanıcı uygulamanın yüklenip yüklenmediğini kontrol eder.")
@@ -198,84 +209,112 @@ public class SettinsStepdefinitions {
     @When("Kullanıcı Login olmadan uygulamayı açar.")
     public void kullanıcıLoginOlmadanUygulamayıAçar() {
 
-
+    settingsPage.continueWithoutLoginButton.click();
 
 
 
     }
 
     @When("Kullanıcı  footer bölümünde {string} bölümünü bulur ve seçer.")
-    public void kullanıcıFooterBölümündeBölümünüBulurVeSeçer(String arg0) {
+    public void kullanıcıFooterBölümündeBölümünüBulurVeSeçer(String Section) {
 
+        switch (Section) {
+            case "Settings":settingsPage.settingsButton.click();break;
 
-
-
+        }
 
     }
 
     @Then("Kullanıcı açılan sayfada {string} bölümünü bulur ve seçer.")
-    public void kullanıcıAçılanSayfadaBölümünüBulurVeSeçer(String arg0) {
+    public void kullanıcıAçılanSayfadaBölümünüBulurVeSeçer(String Section) {
 
+    switch (Section){
+        case "App Settings":settingsPage.appSettingsButton.click();break;
+        case "Updates":settingsPage.updatesButton.click();break;
 
-
-
+    }
 
     }
 
     @But("Kullanıcı {string} sayfasının açıldığını doğrular.")
-    public void kullanıcıSayfasınınAçıldığınıDoğrular(String arg0) {
+    public void kullanıcıSayfasınınAçıldığınıDoğrular(String Section) {
 
+        switch (Section){
+            case "App Settings":Assert.assertTrue(settingsPage.darkSelect.isDisplayed());break;
+            case "Updates":Assert.assertTrue(settingsPage.darkSelect.isDisplayed());;break;
 
-
+        }
 
 
     }
 
     @And("Kullanıcı Theme bölümünden tema rengini {string} olarak değiştirir.")
-    public void kullanıcıThemeBölümündenTemaRenginiOlarakDeğiştirir(String arg0) {
+    public void kullanıcıThemeBölümündenTemaRenginiOlarakDeğiştirir(String theme) {
 
-
+    switch (theme) {
+        case "Light":settingsPage.lightSelect.click();break;
+        case "Dark":settingsPage.darkSelect.click();break;
+    }
 
 
     }
 
     @But("Kullnıcı tema renginin {string} olarak değiştiğini doğrular.")
-    public void kullnıcıTemaRengininOlarakDeğiştiğiniDoğrular(String arg0) {
-
-
+    public void kullnıcıTemaRengininOlarakDeğiştiğiniDoğrular(String theme) {
+        ReusableMethods.wait(2);
+        switch (theme){
+            case "Light": Assert.assertTrue(settingsPage.lightSelect.isEnabled());break;
+            case "Dark":Assert.assertTrue(settingsPage.darkSelect.isEnabled());break;
+        }
 
 
     }
 
     @And("Kullanıcı Language bölümünden dili {string} olarak değiştirir.")
-    public void kullanıcıLanguageBölümündenDiliOlarakDeğiştirir(String arg0) {
+    public void kullanıcıLanguageBölümündenDiliOlarakDeğiştirir(String language) {
 
-
+    switch (language) {
+        case "English": settingsPage.englishSelect.click();break;
+        case "Turkish": settingsPage.turkishSelect.click();break;
+        case "French": settingsPage.frenchSelect.click();break;
+    }
 
 
 
     }
 
     @But("Kullnıcı dil seçeneğinin {string} olarak değiştiğini doğrular.")
-    public void kullnıcıDilSeçeneğininOlarakDeğiştiğiniDoğrular(String arg0) {
-
-
+    public void kullnıcıDilSeçeneğininOlarakDeğiştiğiniDoğrular(String language) {
+    ReusableMethods.wait(2);
+    switch (language) {
+        case "English": Assert.assertTrue(settingsPage.getLocateWithText("Dark").isDisplayed()); break;
+        case "Turkish": Assert.assertTrue(settingsPage.getLocateWithText("Koyu").isDisplayed()); break;
+        case "French": Assert.assertTrue(settingsPage.getLocateWithText("Sombre").isDisplayed()); break;
+    }
 
 
     }
 
     @And("Kullanıcı Unit bölümünden birimi {string} olarak değiştirir.")
-    public void kullanıcıUnitBölümündenBirimiOlarakDeğiştirir(String arg0) {
+    public void kullanıcıUnitBölümündenBirimiOlarakDeğiştirir(String Unit) {
 
+        switch (Unit) {
+            case "Imperial": settingsPage.imperialSelect.click();break;
+            case "Metric": settingsPage.metricSelect.click();break;
 
+        }
 
 
     }
 
     @But("Kullnıcı unit seçeneğinin {string} olarak değiştiğini doğrular.")
-    public void kullnıcıUnitSeçeneğininOlarakDeğiştiğiniDoğrular(String arg0) {
+    public void kullnıcıUnitSeçeneğininOlarakDeğiştiğiniDoğrular(String Unit) {
 
-
+        ReusableMethods.wait(2);
+        switch (Unit){
+            case "Imperial": Assert.assertTrue(settingsPage.getLocateWithText("Imperial").isDisplayed());break;
+            case "Metric":Assert.assertTrue(settingsPage.getLocateWithText("Metric").isDisplayed());break;
+        }
 
 
     }
@@ -354,5 +393,10 @@ public class SettinsStepdefinitions {
     public void kullanıcıProfilBölümüneErişir() {
         settingsPage.settingsButton.click();
         ReusableMethods.waitForVisibility(settingsPage.profilSettingsButton);
+    }
+
+    @Then("Kullanıcı Mobil uygulamayı kapatır")
+    public void kullanıcıMobilUygulamayıKapatır() {
+        Driver.quitAppiumDriver();
     }
 }
