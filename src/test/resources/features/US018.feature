@@ -1,10 +1,10 @@
-@wip
+
   Feature:US_018 Kullanıcı Profile Settings butonunun çalışıp çalışmadığını kontrol edebilmeli
 
     Background:Apps Launcher
       Given Kullanıcı Mobil uygulamayı açar
 
-
+    @wip
     Scenario: US_018 TC_001 Kullanıcı üye olmadan "profil settings" bölümüne giriş yapamamalı.
 
 
