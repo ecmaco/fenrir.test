@@ -238,10 +238,10 @@ public class SettinsStepdefinitions {
 
     @But("Kullanıcı {string} sayfasının açıldığını doğrular.")
     public void kullanıcıSayfasınınAçıldığınıDoğrular(String Section) {
-
+        ReusableMethods.wait(2);
         switch (Section){
             case "App Settings":Assert.assertTrue(settingsPage.darkSelect.isDisplayed());break;
-            case "Updates":Assert.assertTrue(settingsPage.darkSelect.isDisplayed());;break;
+            case "Updates":Assert.assertTrue(settingsPage.getLocateWithText("2023 Öne Çıkanlar").isDisplayed());;break;
 
         }
 
@@ -320,25 +320,36 @@ public class SettinsStepdefinitions {
     }
 
     @But("Kullanıcı {string} başlığının belirtilen dille uyumluluğunu doğrular.")
-    public void kullanıcıBaşlığınınBelirtilenDilleUyumluluğunuDoğrular(String arg0) {
+    public void kullanıcıBaşlığınınBelirtilenDilleUyumluluğunuDoğrular(String ingredients) {
 
-
-
+        ReusableMethods.wait(2);
+        switch (ingredients) {
+            case "2023 Öne Çıkanlar ":Assert.assertEquals(settingsPage.trEnText.getText(),settingsPage.trText.getText());break;
+            case "Latest news about ev's ":Assert.assertTrue(settingsPage.enText.getText().contains("Latest news about ev's"));break;
+        }
 
 
     }
 
     @Then("Kullanıcı {string} başlığına tiklar.")
-    public void kullanıcıBaşlığınaTiklar(String arg0) {
+    public void kullanıcıBaşlığınaTiklar(String title) {
 
-
+        switch (title){
+            case "2023 Öne Çıkanlar ":settingsPage.trText.click();break;
+            case "Latest news about ev's ":settingsPage.enText.click();break;
+        }
 
 
 
     }
 
     @But("Kullanıcı {string} bölümünde yer alan bilgilerin içerikle uyumluluğunu doğrular.")
-    public void kullanıcıBölümündeYerAlanBilgilerinIçerikleUyumluluğunuDoğrular(String arg0) {
+    public void kullanıcıBölümündeYerAlanBilgilerinIçerikleUyumluluğunuDoğrular(String ingredients) {
+
+        switch (ingredients){
+            case "2023 Öne Çıkanlar ":Assert.assertTrue(settingsPage.trContainText.getText().contains("2030"));;break;
+            case "Latest news about ev's ":Assert.assertTrue(settingsPage.enContainText.getText().contains("Tesla finally builds"));;break;
+        }
 
 
 
