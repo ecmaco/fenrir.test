@@ -4,7 +4,7 @@
     Background:Apps Launcher
       Given Kullanıcı Mobil uygulamayı açar
 
-
+    @wip
     Scenario: US_018 TC_001 Kullanıcı üye olmadan "profil settings" bölümüne giriş yapamamalı.
 
 

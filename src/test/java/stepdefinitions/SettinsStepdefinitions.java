@@ -5,6 +5,8 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
@@ -17,16 +19,23 @@ import utilities.ReusableMethods;
 
 import java.awt.event.KeyEvent;
 import java.net.URL;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 
 public class SettinsStepdefinitions {
 
     SettingsPage settingsPage=new SettingsPage();
+
+
+    TouchAction action=new TouchAction(Driver.getAndroidDriver());
+
     ChargePlannerPage chargePlannerPage= new ChargePlannerPage();
     TouchAction touchAction=new TouchAction(Driver.getAndroidDriver());
 
+
     AndroidDriver driver;
+
     @Given("Kullanıcı Mobil uygulamayı açar")
     public void kullanıcı_mobil_uygulamayı_açar() {
 
@@ -56,17 +65,15 @@ public class SettinsStepdefinitions {
     public void kullanıcının_mobil_uygulamada_üye_olmadan_bölümüne_giriş_yapamamasını_doğrulamalıdır(String string) {
 
 
-      //  Driver.getAndroidDriver().switchTo().frame(settingsPage.profilSettingsFrame);
-        MobileElement errorMessage = (MobileElement) driver.findElementById("android:id/message");
-       if (errorMessage.isDisplayed()) {
-            String alertText =errorMessage.getText();
+
+       if (settingsPage.errorMessage.isDisplayed()) {
+           ReusableMethods.waitForVisibility(settingsPage.errorMessage);
+            String alertText =settingsPage.errorMessage.getText();
             Assert.assertEquals(alertText, "Please sign-up to use this function.");
         } else {
             Assert.fail("Uyarı penceresi görünmüyor veya beklenen şartlar sağlanmıyor.");
         }
-        System.out.println(errorMessage.getText());
-       //driver.switchTo().parentFrame();
-
+        System.out.println(settingsPage.errorMessage.getText());
 
     }
 
@@ -303,6 +310,21 @@ public class SettinsStepdefinitions {
         ReusableMethods.waitForVisibility(settingsPage.removeMyAccountButton);
     }
 
+
+ /*   @Given("ilk ekran ayarlari yapin")
+    public void ilkEkranAyarlariYapin() {
+        do {
+            ReusableMethods.clickWithTimeOut(settingsPage.allowButton, 3);
+            ReusableMethods.wait(5);
+        } while (ReusableMethods.control());
+
+        for (int i = 0; i < 4; i++) {
+            action.press(PointOption.point(957, 1893))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                    .release().perform();
+        }
+    }*/
+
     @Then("Mesajlar butonunun gorunur oldugu kontrol edilir")
     public void mesajlarButonununGorunurOlduguKontrolEdilir() {
         ReusableMethods.wait(1);
@@ -322,4 +344,5 @@ public class SettinsStepdefinitions {
         ReusableMethods.wait(1);
         Assert.assertTrue(settingsPage.noMessagesText.isEnabled());
     }
+
 }
