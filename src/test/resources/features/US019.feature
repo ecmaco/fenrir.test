@@ -49,7 +49,7 @@ Feature:US_019 Kullanıcı App Settings butonunun çalışıp çalışmadığın
     And Kullanıcı Unit bölümünden birimi "Imperial" olarak değiştirir.
     But Kullnıcı unit seçeneğinin "imperial" olarak değiştiğini doğrular.
     Then Kullanıcı Mobil uygulamayı kapatır
-  @yeni
+
   Scenario: US_019 TC_008 Kullanıcı "Birim" bölümünde bulunan birim seçeneğini "Metric" olarak seçtiğinde birimin imperial olduğunu doğrulalı
 
     And Kullanıcı Unit bölümünden birimi "Imperial" olarak değiştirir.

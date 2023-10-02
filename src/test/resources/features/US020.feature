@@ -10,21 +10,26 @@ Feature:US_020 Kullanıcı Updates butonunun çalışıp çalışmadığını ko
   Scenario: US_020 TC_001 Kullanıcı  "Updates" bölümüne giriş yapabilmeli.
 
     But Kullanıcı "Updates" sayfasının açıldığını doğrular.
+    Then Kullanıcı Mobil uygulamayı kapatır
 
   Scenario: US_020 TC_002 Kullanıcı "2023 Öne Çıkanlar " başlığının belirtilen dille uyumluluğu doğrulanmalı
 
     But Kullanıcı "2023 Öne Çıkanlar " başlığının belirtilen dille uyumluluğunu doğrular.
+    Then Kullanıcı Mobil uygulamayı kapatır
 
   Scenario: US_020 TC_003 Kullanıcı "2023 Öne Çıkanlar " bölümünde yer alan bilgilerin içerikle uyumluluğu doğrulanmalı
 
     Then Kullanıcı "2023 Öne Çıkanlar " başlığına tiklar.
     But Kullanıcı "2023 Öne Çıkanlar " bölümünde yer alan bilgilerin içerikle uyumluluğunu doğrular.
+    Then Kullanıcı Mobil uygulamayı kapatır
 
   Scenario:  US_020 TC_004 Kullanıcı "Latest news about ev's " başlığının belirtilen dille uyumluluğu doğrulanmalı
 
     But Kullanıcı "Latest news about ev's " başlığının belirtilen dille uyumluluğunu doğrular.
-
+    Then Kullanıcı Mobil uygulamayı kapatır
+  @yeni
   Scenario:  US_020 TC_005 Kullanıcı "Latest news about ev's " bölümünde yer alan bilgilerin içerikle uyumluluğu doğrulanmalı
 
     Then Kullanıcı "Latest news about ev's " başlığına tiklar.
     But Kullanıcı "Latest news about ev's " bölümünde yer alan bilgilerin içerikle uyumluluğunu doğrular.
+    Then Kullanıcı Mobil uygulamayı kapatır
