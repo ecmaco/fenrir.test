@@ -36,7 +36,7 @@
       Then Kullanıcı Profil Ayarları sayfasında güncellenebilir bilgileri ( ad, soyad, e-posta, telefon numarası) bulur ve bu bilgileri günceller.
       Then Kullanıcı bilgileri güncelledikten sonra "Kaydet" ve "Onayla" butonuna tıklar.
       But Kullanıcı bilgilerin başarıyla güncellendiğini ve "Kaydet" butonunun işlevsel olduğunu doğrular.
-    @yeni
+
     Scenario:  US_018 TC_005 Kullanıcı "profil settings" bölümündeki "Remove My Account" butonunun işlevsel olduğunu doğrulamalı
 
       When Kullanıcı, doğru kullanıcı adı ve şifre bilgileri ile başarılı bir şekilde giriş yapar.
