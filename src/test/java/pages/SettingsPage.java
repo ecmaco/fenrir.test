@@ -122,16 +122,16 @@ public class SettingsPage {
     @FindBy(xpath = "//*[@text='\uE001']")
     public MobileElement profilIcon;
 
-    @FindBy(xpath = "//*[@text='Test Plug']")
+    @FindBy(xpath = "//*[@text='test test']")
     public MobileElement nameText;
 
     @FindBy(xpath = "//*[@text='Profile informations has been updated']")
     public MobileElement updateText;
 
-    @FindBy(xpath = "")
+    @FindBy(xpath = "//*[@text='Remove My Account']")
     public MobileElement removeText;
 
-    @FindBy(xpath = "")
+    @FindBy(xpath = "//*[@text='OK']")
     public MobileElement removeAcceptButton;
 
     @FindBy(xpath = "//*[@text='CANCEL']")

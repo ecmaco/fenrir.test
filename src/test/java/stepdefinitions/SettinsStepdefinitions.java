@@ -139,10 +139,14 @@ public class SettinsStepdefinitions {
     public void kullanıcıProfilAyarlarıSayfasındaKullanıcınınAdıEPostaTelefonNumarasıGibiProfilBilgileriniKontrolEderVeBilgilerinDoğruOlduğunuDoğrular() {
 
         String actualMailText=settingsPage.mailText.getText();
+        System.out.println("actualMailText = " + actualMailText);
         String expectedMailText=ConfigReader.getProperty("mail");
+        System.out.println("expectedMailText = " + expectedMailText);
         Assert.assertEquals(expectedMailText, actualMailText);
         String actualNameText=settingsPage.nameText.getText();
+        System.out.println("actualNameText = " + actualNameText);
         String expectedNameText=ConfigReader.getProperty("name");
+        System.out.println("expectedNameText = " + expectedNameText);
         Assert.assertEquals(expectedNameText, actualNameText);
     }
 
@@ -173,6 +177,7 @@ public class SettinsStepdefinitions {
     @Then("Kullanıcı {string} butonuna tıkladığında bir uyarı mesajı aldığını goğrulamalıdır.")
     public void kullanıcıButonunaTıkladığındaBirUyarıMesajıAldığınıGoğrulamalıdır(String removeMessage) {
 
+        settingsPage.removeMyAccountButton.click();
         ReusableMethods.waitForVisibility(settingsPage.removeText);
         Assert.assertTrue(settingsPage.removeText.isDisplayed());
 
@@ -181,13 +186,13 @@ public class SettinsStepdefinitions {
     @Then("Kullanıcı, uyarı mesajını okumalı ve talimatları takip ederek hesabını kaldırmayı onaylamalıdır.")
     public void kullanıcıUyarıMesajınıOkumalıVeTalimatlarıTakipEderekHesabınıKaldırmayıOnaylamalıdır() {
 
-        settingsPage.settingsButton.click();
+        settingsPage.removeCancelButton.click();
     }
 
     @But("Kullanıcı hesabın kaldırıldığını doğrulamalıdır.")
     public void kullanıcıHesabınKaldırıldığınıDoğrulamalıdır() {
-        ReusableMethods.waitForVisibility(settingsPage.loginButton);
-        Assert.assertTrue(settingsPage.loginButton.isDisplayed());
+        ReusableMethods.waitForVisibility(settingsPage.saveButton);
+        Assert.assertTrue(settingsPage.saveButton.isDisplayed());
     }
 
     @When("Kullanıcı Login olmadan uygulamayı açar.")
@@ -345,4 +350,9 @@ public class SettinsStepdefinitions {
         Assert.assertTrue(settingsPage.noMessagesText.isEnabled());
     }
 
+    @Then("Kullanıcı profil bölümüne erişir")
+    public void kullanıcıProfilBölümüneErişir() {
+        settingsPage.settingsButton.click();
+        ReusableMethods.waitForVisibility(settingsPage.profilSettingsButton);
+    }
 }
