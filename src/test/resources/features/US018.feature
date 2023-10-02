@@ -4,7 +4,7 @@
     Background:Apps Launcher
       Given Kullanıcı Mobil uygulamayı açar
 
-    @wip
+
     Scenario: US_018 TC_001 Kullanıcı üye olmadan "profil settings" bölümüne giriş yapamamalı.
 
 
@@ -31,11 +31,12 @@
     Scenario:  US_018 TC_004 Kullanıcı "profil settings" bölümündeki bilgileri güncelleyebilmeli ve  "Kaydet" butonunun işlevsel olduğunu doğrulamalı.
 
       When Kullanıcı, doğru kullanıcı adı ve şifre bilgileri ile başarılı bir şekilde giriş yapar.
+      Then Kullanıcı profil bölümüne erişir
       Then Kullanıcı "Kullanıcı adı" veya "profil resmi" 'ne tıklayarak profil menüsüne erişir.
       Then Kullanıcı Profil Ayarları sayfasında güncellenebilir bilgileri ( ad, soyad, e-posta, telefon numarası) bulur ve bu bilgileri günceller.
       Then Kullanıcı bilgileri güncelledikten sonra "Kaydet" ve "Onayla" butonuna tıklar.
       But Kullanıcı bilgilerin başarıyla güncellendiğini ve "Kaydet" butonunun işlevsel olduğunu doğrular.
-
+    @yeni
     Scenario:  US_018 TC_005 Kullanıcı "profil settings" bölümündeki "Remove My Account" butonunun işlevsel olduğunu doğrulamalı
 
       When Kullanıcı, doğru kullanıcı adı ve şifre bilgileri ile başarılı bir şekilde giriş yapar.
