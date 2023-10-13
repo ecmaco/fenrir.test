@@ -160,7 +160,7 @@ public class ChargePlannerStepdefinitions {
 
     @Then("Settings tusuna basilarak ayarlar kismina gidilir")
     public void settingTusunaBasilarakAyarlarKisminaGidilir() {
-
+        ReusableMethods.wait(2);
         chargePlannerPage.settingsButton.click();
         ReusableMethods.wait(2);
     }

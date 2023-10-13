@@ -165,5 +165,48 @@ public class SettingsPage {
 
     @FindBy(xpath = "//*[@text='No Messages']")
     public MobileElement noMessagesText;
+
+    @FindBy(xpath = "//*[@text='My Chargers']")
+    public MobileElement myChargersButton;
+
+    @FindBy(xpath = "//*[@text='No Chargers']")
+    public MobileElement noChargersText;
+
+    @FindBy(xpath = "(//*[@index='1'])[6]")
+    public MobileElement listYourChargerButton;
+
+    @FindBy(xpath = "//*[@text='Next']")
+    public MobileElement nextButton;
+
+    @FindBy(xpath = "//*[@text='Max kWh']")
+    public MobileElement maxKwh;
+
+    @FindBy(xpath = "//*[@text='Kw Price']")
+    public MobileElement kwPrice;
+
+    @FindBy (xpath = "//*[@text='Currency']")
+    public MobileElement currency;
+
+    @FindBy(xpath = "//*[@text='Plug Type']")
+    public MobileElement plugType;
+
+    @FindBy(xpath = "//*[@text='Charger Brand']")
+    public MobileElement chargerBrand;
+
+    @FindBy(xpath = "//*[@text='Payment Type']")
+    public MobileElement paymentType;
+
+    @FindBy(xpath = "//*[@text='Finish']")
+    public MobileElement finishButton;
+
+    @FindBy(xpath = "//*[@text='Description']")
+    public MobileElement description;
+
+    @FindBy (xpath = "//*[@text='Your charger station has been added successfully, we will inform you after approve.']")
+    public MobileElement addedChargerConfirm;
+
+
+
+
 }
 
