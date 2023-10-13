@@ -400,6 +400,69 @@ public class SettinsStepdefinitions {
         Assert.assertTrue(settingsPage.noMessagesText.isEnabled());
     }
 
+
+    @Then("Ayarlar sekmesinde My Chargers sayfasinin gorunur oldugu dogrulanir")
+    public void ayarlarSekmesindeMyChargersSayfasininGorunurOlduguDogrulanir() {
+        Assert.assertTrue(settingsPage.myChargersButton.isDisplayed());
+    }
+
+    @Given("My Chargers sekmesine tiklanir")
+    public void myChargersSekmesineTiklanir() {
+        settingsPage.settingsButton.click();
+        settingsPage.myChargersButton.click();
+        ReusableMethods.wait(2);
+        
+    }
+
+    @Then("{string} butonuna tiklanir")
+    public void butonunaTiklanir(String string) {
+        ReusableMethods.wait(2);
+        settingsPage.listYourChargerButton.click();
+        ReusableMethods.wait(3);
+        
+    }
+
+    @Then("Gerekli bilgiler girilerek {string} butonuna tiklanir")
+    public void gerekliBilgilerGirilerekButonunaTiklanir(String string) {
+        //settingsPage.settingsButton.click();
+       // settingsPage.myChargersButton.click();
+       // settingsPage.listYourChargerButton.click();
+        //ReusableMethods.wait(2);
+        //settingsPage.nextButton.click();
+        //ReusableMethods.wait(3);
+        settingsPage.description.sendKeys("yeni sarj istasyonu");
+        settingsPage.maxKwh.click();
+        ReusableMethods.wait(1);
+        ReusableMethods.scrollWithUiScrollable("2 kWh");
+        settingsPage.kwPrice.sendKeys("1.2");
+        settingsPage.currency.click();
+        ReusableMethods.scrollWithUiScrollable("$");
+        settingsPage.plugType.click();
+        ReusableMethods.wait(1);
+        ReusableMethods.scrollWithUiScrollable("Tesla");
+        settingsPage.chargerBrand.sendKeys("yusuf");
+        settingsPage.paymentType.click();
+        ReusableMethods.scrollWithUiScrollable("Credit Card");
+        ReusableMethods.scrollWithUiScrollable("Finish");
+
+
+
+
+
+
+
+    }
+
+    @Then("Sarj istasyonunun eklendigine dair onay mesajinin ekranda goruntulendigi dogrulanir")
+    public void sarjIstasyonununEklendigineDairOnayMesajininEkrandaGoruntulendigiDogrulanir() {
+        Assert.assertTrue(settingsPage.addedChargerConfirm.isDisplayed());
+    }
+
+    @And("{string} butonuna tiklanir ve devam edilir")
+    public void butonunaTiklanirVeDevamEdilir(String arg0) {
+        settingsPage.nextButton.click();
+        ReusableMethods.wait(2);
+
     @Then("Kullanıcı profil bölümüne erişir")
     public void kullanıcıProfilBölümüneErişir() {
         settingsPage.settingsButton.click();
@@ -409,5 +472,6 @@ public class SettinsStepdefinitions {
     @Then("Kullanıcı Mobil uygulamayı kapatır")
     public void kullanıcıMobilUygulamayıKapatır() {
         Driver.quitAppiumDriver();
+
     }
 }
